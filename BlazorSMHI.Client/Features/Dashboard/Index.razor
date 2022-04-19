@@ -1,0 +1,81 @@
+﻿@page "/"
+
+<PageTitle>Dashboard</PageTitle>
+
+<div class="d-block">
+    <div class="row text-center">
+        <h1>Dashboard
+            <a class="btn btn-dark float-end" href="/machineedit/">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </h1>
+    </div>
+    <div class="row text-center">
+        <p>Overview of all your industrial machines.</p>
+    </div>
+</div>
+
+<div class="row row-cols-auto g-4 py-3 justify-content-center">
+    @foreach (var machine in Machines)
+    {
+        var lastReadingData = machine.MachineData.Count > 0 ? $"{machine.MachineData.First().Data} ° C"  : "Nothing yet..";
+        var lastReadingTime = machine.MachineData.Count > 0 ? 
+            $"Last updated {DateTime.Now.ToShortTimeString()}" : "Recently created";
+
+        <div class="col">
+            <div class="card border-dark border-2">
+                <div class="card-body justify-content-between">
+                    <div class="d-inline-flex">
+                        @{
+                            var isOnline = machine.Status == MachineStatus.Online;
+                        }
+                        <h5 class="card-title me-4 pt-2">
+                            <MachineStatusIcon IsOnline=@isOnline></MachineStatusIcon>
+                            @machine.Name
+                        </h5>
+                        <div class="form-check form-switch pt-2">
+                            <input class="form-check-input" @onchange="(e) => ToggleMachine(e.Value!, machine)"
+                                type="checkbox" id="onlineSwitch" checked="@isOnline">
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="name">@machine.MachineType.Name</span>
+                        <span class="subtext">@machine.MachineType.Description</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="name">@machine.MachineLocation.City</span>
+                        <span class="subtext">@machine.MachineLocation.Country</span>    
+                    </li>
+                    @if(machine.MachineType.Name == "Temperature Sensor")
+                    {
+                        <li class="list-group-item">
+                            <span class="name">Reading</span>
+                            <span class="subtext">@lastReadingData</span>    
+                        </li>
+                    }
+                    <li class="list-group-item">
+                        <div class="pt-1">
+                            <a class="btn btn-dark btn-sm" href="@($"/machinedetails/{machine.Id}")">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </a>
+                            <a class="btn btn-dark btn-sm" href="@($"/machineedit/{machine.Id}")">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button class="btn btn-outline-danger btn-sm float-end" @onclick="() => DeleteMachine(machine)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>  
+                    </li>
+                </ul>
+                <div class="card-footer">
+                    <small class="text-dark">@lastReadingTime</small>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+    
+ 

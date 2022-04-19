@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Counter\**" />
+    <Content Remove="Features\Counter\**" />
+    <EmbeddedResource Remove="Features\Counter\**" />
+    <None Remove="Features\Counter\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Blazorise.Bootstrap" Version="1.0.2" />
+	<PackageReference Include="Blazorise.Charts" Version="1.0.2" />
+	<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.2" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
+	<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Folder Include="Features\Dashboard\Machines\Components\" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorSMHI.Shared\BlazorSMHI.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

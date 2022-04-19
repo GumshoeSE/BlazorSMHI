@@ -110,8 +110,8 @@ namespace BlazorSMHI.FuncApi
                     Id = Guid.NewGuid(),
                     Country = "Sweden",
                     City = "Stockholm",
-                    Longitude = 18.0686f,
-                    Latitude = 59.3293f
+                    Longitude = 18.069f,
+                    Latitude = 59.324f
                 });
             }
             if (!response.Exists(l => l.City == "Göteborg"))

@@ -13,7 +13,7 @@ namespace BlazorSMHI.Shared.Entities
 
         public override bool Equals(object? obj)
         {
-            var item = obj as MachineType;
+            var item = obj as MachineLocation;
             if (item == null) return false;
 
             return item.Id == Id;
